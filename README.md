@@ -1,5 +1,5 @@
 # Running the Server:
-# Weekend Challenge 2: #
+#Weekend Challenge 2:#
 # Upsilon GitHub Directory and Shoutouts #
 
 This repository is a GitHub Directory for the Upsilon Cohort.  The directory includes the cohort member names, a link to their GitHub page, and a shoutout telling how great they are.
