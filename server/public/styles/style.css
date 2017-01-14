@@ -1,0 +1,93 @@
+* {
+  border: 1px solid black;
+}
+
+.containerDiv {
+  min-width: 95%;
+  margin: 10px auto;
+  text-align: center;
+  /*padding: 3px auto;*/
+  /*margin: 0 auto;*/
+}
+
+#leftArrow, #rightArrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  display: inline-block;
+}
+
+#leftArrow {
+  border-right: 30px solid blue;
+}
+
+#leftArrow:hover {
+  border-right: 30px solid limegreen;
+}
+
+#rightArrow {
+  border-left: 30px solid blue;
+}
+
+#rightArrow:hover {
+  border-left: 30px solid limegreen;
+}
+
+.goPrevious, .goNext {
+  /*float: left;*/
+  /*top: 45%;*/
+  font-size: 1.5em;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.cohortInfo {
+  /*float: left;*/
+  width: 75%;
+  border: 10px solid black;
+  padding: 5px 5px;
+  font-size: 1.5em;
+  display: inline-block;
+}
+
+
+
+.indexRow {
+  /*clear: both;*/
+  /*position: relative;*/
+
+  /*font-size: 1em;*/
+  /*display: inline;*/
+  /*margin-right: 10px;*/
+    clear: both;
+    width: 95%;
+    margin: 5px auto;
+    padding: 1px 1px;
+    background-color: tomato;
+    height: 55px;
+    text-align: center;
+}
+
+.indexRow button {
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  margin: 30% auto;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.indexRow button:hover {
+  background-color: yellow;
+}
+
+.indexPersonDiv {
+    /*float: left;*/
+    height: 50px;
+    width: 50px;
+    /*text-align: center;*/
+    font-weight: bold;
+    display: inline-block;
+    margin: 3px 1px;
+}
