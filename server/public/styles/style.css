@@ -1,13 +1,15 @@
-* {
+/** {
   border: 1px solid black;
+}*/
+
+h1 {
+  text-align: center;
 }
 
 .containerDiv {
   min-width: 95%;
   margin: 10px auto;
   text-align: center;
-  /*padding: 3px auto;*/
-  /*margin: 0 auto;*/
 }
 
 #leftArrow, #rightArrow {
@@ -26,6 +28,10 @@
   border-right: 30px solid limegreen;
 }
 
+.goPrevious p:hover {
+  color: limegreen;
+}
+
 #rightArrow {
   border-left: 30px solid blue;
 }
@@ -34,43 +40,44 @@
   border-left: 30px solid limegreen;
 }
 
+.goNext p:hover {
+  color: limegreen;
+}
+
 .goPrevious, .goNext {
-  /*float: left;*/
-  /*top: 45%;*/
   font-size: 1.5em;
   font-weight: bold;
   display: inline-block;
 }
 
+.goPrevious p, .goNext p {
+  font-weight: bold;
+  display: inline-block;
+
+}
+
 .cohortInfo {
-  /*float: left;*/
   width: 75%;
   border: 10px solid black;
   padding: 5px 5px;
   font-size: 1.5em;
   display: inline-block;
+  min-height: 250px;
 }
 
 
-
 .indexRow {
-  /*clear: both;*/
-  /*position: relative;*/
-
-  /*font-size: 1em;*/
-  /*display: inline;*/
-  /*margin-right: 10px;*/
-    clear: both;
+    /*clear: both;  not necessary since not floating.*/
     width: 95%;
     margin: 5px auto;
     padding: 1px 1px;
-    background-color: tomato;
-    height: 55px;
+    background-color: black;
+    height: 70px;
     text-align: center;
 }
 
 .indexRow button {
-  background-color: gold;
+  background-color: gold; /* hover yellow */
   color: black;
   font-weight: bold;
   margin: 30% auto;
@@ -79,15 +86,17 @@
 }
 
 .indexRow button:hover {
-  background-color: yellow;
+  background-color: yellow; /* normal gold */
+}
+
+.indexRowCurrent {
+  box-shadow: 0px 0px 40px 20px white; /* highlight for current person */
 }
 
 .indexPersonDiv {
-    /*float: left;*/
     height: 50px;
     width: 50px;
-    /*text-align: center;*/
     font-weight: bold;
     display: inline-block;
-    margin: 3px 1px;
+    margin: 9px 1px;
 }
