@@ -12,23 +12,28 @@
   {
     "name": "Bob Hinkley",
     "githubUserName": "Bob-Hinkley",
-    "shoutout":"Thanks Bob, for being so happy" 
+    "shoutout":"Thanks Bob, for being so happy"
   },
-   {
+  {
+    "name" : "Brian Schorn",
+    "githubUserName" : "relCORE",
+    "shoutout" : "Brian, thanks for asking questions that I'm also thinking about!"
+  },
+  {
      "name" : "Charles Kuruvila",
      "githubUserName" : "ckuruvi",
      "shoutout": "Shoutout to Charles for being such a big help with walking through questions I have."
-   },
-   {
+  },
+  {
      "name" : "Charlie Garnaas",
      "githubUserName" : "chargar",
      "shoutout": "Thanks to Charlie for his endless passion for GIFs. It never ceases to bring levity to the room."
-   },
-   {
-     "name" : "erik nelson",
+  },
+  {
+     "name" : "Erik Nelson",
      "githubUserName" : "ejnelson",
      "shoutout": "Thank you Erik for great feedback with coding and different ways to go about it."
-   },
+  },
    {
      "name" : "Erik Noonan",
      "githubUserName" : "noonsky",
