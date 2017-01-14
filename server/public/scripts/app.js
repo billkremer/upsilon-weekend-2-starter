@@ -1,30 +1,44 @@
 $(document).ready(function(){
 var currentPerson = {};
 var currentPersonIndex = 0;
-
+var currentColor = 'white';
 
   $.ajax({
     type: "GET",
     url: "/data",
     success: function(data){
 
-    appendDOM(data[currentPersonIndex]); // puts the current (first) person into the DOM
+
     data.forEach( function (person) {
-    createDOMIndex(person); //
+      currentColor = randColorString ();
+      createDOMIndex(person, currentColor); //
+  }); // creates the index for everyone in the data.
+
+    appendDOM(data[currentPersonIndex]); // puts the current ( initally the first) person into the DOM
+    // also adds the highlighting class for the person's index.
+    // would like to have the background-color or border of the div be their index color.
+
+    currentPerson = data[currentPersonIndex].name; // grabs first person name
+    console.log('currentperson' + currentPersonIndex);
+
+
+    $('.goPrevious').on('click', function () {
+      if (currentPersonIndex == 0) {
+        currentPersonIndex = data.length-1;
+      } else {
+        currentPersonIndex--;
+      }
+      appendDOM(data[currentPersonIndex]);
     });
 
-    // console.log(data);
-    currentPerson = data[currentPersonIndex].name; // grabs first person name
-    // console.log('currentperson' + currentPerson)
-
-    $()
-
-
-
-
-
-    //figure out current person
-  //      appendDOM(currentPerson); // this needs an individual
+    $('.goNext').on('click', function () {
+      if (currentPersonIndex == data.length-1) {
+        currentPersonIndex = 0;
+      } else {
+        currentPersonIndex++;
+      }
+      appendDOM(data[currentPersonIndex]);
+    });
 
 
 
@@ -33,29 +47,42 @@ var currentPersonIndex = 0;
   });
 });
 
-function createDOMIndex(data) {
+function createDOMIndex(data, color) {
 // this function places the initials of everyone at the bottome
   var initials ="";
   var initialArray =  data.name.split(" ");
 
   initialArray.forEach( function (names) {
     initials += names[0];
-  })
+  }) // makes a string of the indiviuals initials for use in the buttons.
 
-  var $personIndex = $('<div class="indexPersonDiv" style="background-color:' + randColorString() + '"></div>');
+  var $personIndex = $('<div class="indexPersonDiv" style="background-color:' + color + '" id="' + data.githubUserName + '"></div>');
   // creates the divs and applies a random color
-  $personIndex.append('<button>'+initials+'</button>')
+  $personIndex.append('<button>'+initials+'</button>');
   // places the persons initials inside the box.
-  $('.indexRow').append($personIndex)
+  $('.indexRow').append($personIndex);
 }
 
 
 function appendDOM (person) {
-  var $personDiv = $('<p>' + person.name + '</p>')
+
+  $('.cohortInfo').children('div').remove();
+  // clears the previous data out
+  $('.indexRow').children().removeClass('indexRowCurrent');
+  // removes any already existing highlighting.
+
+
+  var $personDiv = $('<div id="' + person.name + '"</div>');
+  $personDiv.append('<p>' + person.name + '</p>')
   $personDiv.append('<p><a href="https://github.com/' + person.githubUserName + '"</a>https://github.com/' + person.githubUserName + '</a></p>')
   $personDiv.append('<p>' + person.shoutout + '</p>')
+  // builds the html for the DOM.
 
   $('.cohortInfo').append($personDiv);
+  // appends the main personal info in the DOM
+
+  $('.indexRow').find('#' + person.githubUserName).addClass('indexRowCurrent');
+  // toggles the current person down inthe indexRow.
 };
 
 function randColorString () {
