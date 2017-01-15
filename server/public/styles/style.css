@@ -64,8 +64,7 @@ h1 {
   font-size: 1.5em;
   font-weight: bold;
   display: inline-block;
-  /*height: 250px;*/
-  /*border: 1px solid black; working to line up with .cohortInfo */
+  /*border: 1px solid black; /*working to line up with .cohortInfo */*/
 }
 
 .goPrevious p, .goNext p {
