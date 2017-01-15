@@ -11,7 +11,6 @@ var getStyle = "black"; // gets the color of the box to match to the infobox bor
     url: "/data",
     success: function(data){
 
-
     data.forEach( function (person) {
       currentColor = randColorString ();
       createDOMIndex(person, currentColor); //
@@ -19,38 +18,40 @@ var getStyle = "black"; // gets the color of the box to match to the infobox bor
 
     appendDOM(data[currentPersonIndex]); // puts the current ( initally the first) person into the DOM
     // also adds the highlighting class for the person's index.
-    // would like to have the background-color or border of the div be their index div color.
+    // also sets an internal border of the div to their index div color.
 
-    // currentPerson = data[currentPersonIndex].name; // grabs first person name
-    // console.log('currentperson' + currentPersonIndex);
+// start timer here?
 
 
     $('.goPrevious').on('click', function () {
+// stop timer here
       if (currentPersonIndex == 0) {
         currentPersonIndex = data.length-1;
       } else {
         currentPersonIndex--;
       }
       goToAnother(data, currentPersonIndex);
-    });
+// restart timer here
+    }); // go to the previous person in the list.
 
 
     $('.goNext').on('click', function () {
+// stop timer here
       if (currentPersonIndex == data.length - 1) {
         currentPersonIndex = 0;
       } else {
         currentPersonIndex++;
       }
-      // clearInterval(stopTimer);
-console.log(stopTimer);
       goToAnother(data, currentPersonIndex);
 
+      // clearInterval(stopTimer);
+console.log(stopTimer);
       // stopTimer = setInterval(goToAnother(data, currentPersonIndex), 5000);  // change to 10000 = 10s
 console.log(stopTimer);
+// restart timer here
+    }); // go to the next person in the list
 
-    });
 
-// this section to go where the index button says.
     $('.indexRow').on('click', 'div', function () {
       gotoNameID = $(this).attr('id');
 
@@ -60,7 +61,7 @@ console.log(stopTimer);
         }
       };
         goToAnother(data, currentPersonIndex);
-    });
+    }); // this section to go where the index button says.
 
 
 
