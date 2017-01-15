@@ -48,6 +48,8 @@ h1 {
   font-size: 1.5em;
   font-weight: bold;
   display: inline-block;
+  /*height: 250px;*/
+  /*border: 1px solid black; would like to line up with .cohortInfo */
 }
 
 .goPrevious p, .goNext p {
