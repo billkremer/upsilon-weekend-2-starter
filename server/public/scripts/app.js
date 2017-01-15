@@ -1,10 +1,13 @@
-$(document).ready(function(){
-var currentPerson = {};
+// Global variables
 var currentPersonIndex = 0;
-var currentColor = 'white';
-var stopTimer;
+var currentColor = 'white';  // color placeholder for the individual people
+var stopTimer;  // used to stop the timer
 var gotoNameID = 0; // gets the name of the ID to go directly to a person.
 var getStyle = "black"; // gets the color of the box to match to the infobox border.  starts at black (just in case)
+
+
+// when document is ready
+$(document).ready(function(){
 
   $.ajax({
     type: "GET",
@@ -20,39 +23,41 @@ var getStyle = "black"; // gets the color of the box to match to the infobox bor
     // also adds the highlighting class for the person's index.
     // also sets an internal border of the div to their index div color.
 
-// start timer here?
 
+    stopTimer = setInterval(goNextPerson, 10000);
+    // initial timer starts to rotate through all of the individuals
 
     $('.goPrevious').on('click', function () {
-// stop timer here
+    // go to the previous person in the list.
+
+      clearInterval(stopTimer); // stops the rotating timer
+
       if (currentPersonIndex == 0) {
         currentPersonIndex = data.length-1;
       } else {
         currentPersonIndex--;
       }
-      goToAnother(data, currentPersonIndex);
-// restart timer here
-    }); // go to the previous person in the list.
+      changeCurrentInfo(data, currentPersonIndex);
+
+      stopTimer = setInterval(goNextPerson, 10000); // restart timer
+    });
 
 
     $('.goNext').on('click', function () {
-// stop timer here
-      if (currentPersonIndex == data.length - 1) {
-        currentPersonIndex = 0;
-      } else {
-        currentPersonIndex++;
-      }
-      goToAnother(data, currentPersonIndex);
 
-      // clearInterval(stopTimer);
-console.log(stopTimer);
-      // stopTimer = setInterval(goToAnother(data, currentPersonIndex), 5000);  // change to 10000 = 10s
-console.log(stopTimer);
-// restart timer here
+      clearInterval(stopTimer); // stops the rotating timer
+
+      goNextPerson(); // this function increments the index and updates the DOM
+
+      stopTimer = setInterval(goNextPerson, 10000); // restart timer
     }); // go to the next person in the list
 
 
     $('.indexRow').on('click', 'div', function () {
+      // this section to go to where the index button says to go.
+
+      clearInterval(stopTimer); // stops the rotating timer
+
       gotoNameID = $(this).attr('id');
 
       for (var i = 0; i < data.length; i++) {
@@ -60,28 +65,34 @@ console.log(stopTimer);
         currentPersonIndex = i;
         }
       };
-        goToAnother(data, currentPersonIndex);
-    }); // this section to go where the index button says.
+      changeCurrentInfo(data, currentPersonIndex);
 
+      stopTimer = setInterval(goNextPerson, 10000); // restart timer
+    });
 
+    function goNextPerson () {
+      // this function increments the index then updates the DOM.
+      // needs to be inside the ajax section to have data available.
+      if (currentPersonIndex == data.length - 1) {
+        currentPersonIndex = 0;
+      } else {
+        currentPersonIndex++;
+      }
+      changeCurrentInfo(data, currentPersonIndex);
+    };
 
     } // closes success element
   }); // closes ajax
 });   // closes doc ready
 
-function timerFunction () {
 
-}
-
-
-function goToAnother (data, currentPersonIndex) {
+function changeCurrentInfo (data, currentPersonIndex) {
   // this function fades out the previous person, removes the div, then calls append DOM which fades in the next person.
   $('.cohortInfo').children('div').fadeOut(1000, function() {
     $('.cohortInfo').children('div').remove();
     appendDOM(data[currentPersonIndex]);
   });
-}
-
+};
 
 
 function createDOMIndex(data, color) {
@@ -128,6 +139,7 @@ function appendDOM (person) {
   $('.indexRow').find('#' + person.githubUserName).addClass('indexRowCurrent');
   // toggles the current person down inthe indexRow.
 };
+
 
 function randColorString () {
 // creates a random rgb string for putting inline to the css.  this creates a random box color.
