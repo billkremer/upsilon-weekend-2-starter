@@ -95,6 +95,8 @@ h1 {
 
 .indexRowCurrent {
   box-shadow: 0px 0px 40px 20px white; /* highlight for current person */
+  position:relative;
+  z-index: 1; /* needs position relative to get the shadow above both nearby divs */
 }
 
 .indexPersonDiv {
