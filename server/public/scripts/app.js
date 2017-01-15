@@ -28,7 +28,10 @@ var currentColor = 'white';
       } else {
         currentPersonIndex--;
       }
-      appendDOM(data[currentPersonIndex]);
+      $('.cohortInfo').children('div').fadeOut(1000, function() {
+        $('.cohortInfo').children('div').remove();
+        appendDOM(data[currentPersonIndex]);
+      });
     });
 
     $('.goNext').on('click', function () {
@@ -37,7 +40,10 @@ var currentColor = 'white';
       } else {
         currentPersonIndex++;
       }
-      appendDOM(data[currentPersonIndex]);
+      $('.cohortInfo').children('div').fadeOut(1000, function() {
+        $('.cohortInfo').children('div').remove();
+        appendDOM(data[currentPersonIndex]);
+      });
     });
 
 
@@ -65,24 +71,39 @@ function createDOMIndex(data, color) {
 
 
 function appendDOM (person) {
+  // $('.cohortInfo').children('div').fadeOut(1000);
+// console.log('got this fara');
+  // $('.cohortInfo').children('div').fadeOut('fast', function() {
+// console.log('got this far1');
+    // $('.cohortInfo').children('div').remove();
 
-  $('.cohortInfo').children('div').remove();
+
+
+
+    //  function () {
+console.log('got this far');
+
   // clears the previous data out
   $('.indexRow').children().removeClass('indexRowCurrent');
   // removes any already existing highlighting.
 
-
-  var $personDiv = $('<div id="' + person.name + '"</div>');
+  var $personDiv = $('<div style="display:none;" id="' + person.githubUserName + '"</div>');
   $personDiv.append('<p>' + person.name + '</p>')
   $personDiv.append('<p><a href="https://github.com/' + person.githubUserName + '"</a>https://github.com/' + person.githubUserName + '</a></p>')
   $personDiv.append('<p>' + person.shoutout + '</p>')
   // builds the html for the DOM.
 
+  console.log($personDiv);
+
   $('.cohortInfo').append($personDiv);
   // appends the main personal info in the DOM
 
+  $('.cohortInfo').find('#' + person.githubUserName).fadeIn(1000);
+
   $('.indexRow').find('#' + person.githubUserName).addClass('indexRowCurrent');
   // toggles the current person down inthe indexRow.
+  // });
+  // })
 };
 
 function randColorString () {
