@@ -2,6 +2,8 @@ $(document).ready(function(){
 var currentPerson = {};
 var currentPersonIndex = 0;
 var currentColor = 'white';
+var stopTimer;
+
 
   $.ajax({
     type: "GET",
@@ -12,14 +14,14 @@ var currentColor = 'white';
     data.forEach( function (person) {
       currentColor = randColorString ();
       createDOMIndex(person, currentColor); //
-  }); // creates the index for everyone in the data.
+    }); // creates the index for everyone in the data.
 
     appendDOM(data[currentPersonIndex]); // puts the current ( initally the first) person into the DOM
     // also adds the highlighting class for the person's index.
-    // would like to have the background-color or border of the div be their index color.
+    // would like to have the background-color or border of the div be their index div color.
 
-    currentPerson = data[currentPersonIndex].name; // grabs first person name
-    console.log('currentperson' + currentPersonIndex);
+    // currentPerson = data[currentPersonIndex].name; // grabs first person name
+    // console.log('currentperson' + currentPersonIndex);
 
 
     $('.goPrevious').on('click', function () {
@@ -28,30 +30,56 @@ var currentColor = 'white';
       } else {
         currentPersonIndex--;
       }
-      $('.cohortInfo').children('div').fadeOut(1000, function() {
-        $('.cohortInfo').children('div').remove();
-        appendDOM(data[currentPersonIndex]);
-      });
+      goToAnother(data, currentPersonIndex);
     });
 
+    // $('.goNext').on('click', function () {
+    //   if (currentPersonIndex == data.length-1) {
+    //     currentPersonIndex = 0;
+    //   } else {
+    //     currentPersonIndex++;
+    //   }
+    //   $('.cohortInfo').children('div').fadeOut(1000, function() {
+    //     $('.cohortInfo').children('div').remove();
+    //     appendDOM(data[currentPersonIndex]);
+    //   });
+    // });
+
+
     $('.goNext').on('click', function () {
-      if (currentPersonIndex == data.length-1) {
+      if (currentPersonIndex == data.length - 1) {
         currentPersonIndex = 0;
       } else {
         currentPersonIndex++;
       }
-      $('.cohortInfo').children('div').fadeOut(1000, function() {
-        $('.cohortInfo').children('div').remove();
-        appendDOM(data[currentPersonIndex]);
-      });
-    });
+      // clearInterval(stopTimer);
 
+      goToAnother(data, currentPersonIndex);
+
+      // stopTimer = setInterval(goToTheNext(data, currentPersonIndex), 10000);  // change to 10000 = 10s
+
+
+    });
 
 
 
     }
   });
 });
+
+function timerFunction () {
+
+}
+
+
+function goToAnother (data, currentPersonIndex) {
+  $('.cohortInfo').children('div').fadeOut(1000, function() {
+    $('.cohortInfo').children('div').remove();
+    appendDOM(data[currentPersonIndex]);
+  });
+}
+
+
 
 function createDOMIndex(data, color) {
 // this function places the initials of everyone at the bottome
@@ -67,33 +95,18 @@ function createDOMIndex(data, color) {
   $personIndex.append('<button>'+initials+'</button>');
   // places the persons initials inside the box.
   $('.indexRow').append($personIndex);
-}
+};
 
 
 function appendDOM (person) {
-  // $('.cohortInfo').children('div').fadeOut(1000);
-// console.log('got this fara');
-  // $('.cohortInfo').children('div').fadeOut('fast', function() {
-// console.log('got this far1');
-    // $('.cohortInfo').children('div').remove();
-
-
-
-
-    //  function () {
-console.log('got this far');
-
-  // clears the previous data out
   $('.indexRow').children().removeClass('indexRowCurrent');
   // removes any already existing highlighting.
 
-  var $personDiv = $('<div style="display:none;" id="' + person.githubUserName + '"</div>');
+  var $personDiv = $('<div style="display:none;" id="' + person.githubUserName + '"></div>');
   $personDiv.append('<p>' + person.name + '</p>')
   $personDiv.append('<p><a href="https://github.com/' + person.githubUserName + '"</a>https://github.com/' + person.githubUserName + '</a></p>')
   $personDiv.append('<p>' + person.shoutout + '</p>')
   // builds the html for the DOM.
-
-  console.log($personDiv);
 
   $('.cohortInfo').append($personDiv);
   // appends the main personal info in the DOM
@@ -102,8 +115,6 @@ console.log('got this far');
 
   $('.indexRow').find('#' + person.githubUserName).addClass('indexRowCurrent');
   // toggles the current person down inthe indexRow.
-  // });
-  // })
 };
 
 function randColorString () {
