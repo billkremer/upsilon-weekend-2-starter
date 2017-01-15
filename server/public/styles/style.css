@@ -49,32 +49,34 @@ h1 {
   font-weight: bold;
   display: inline-block;
   /*height: 250px;*/
-  /*border: 1px solid black; would like to line up with .cohortInfo */
+  /*border: 1px solid black; working to line up with .cohortInfo */
 }
 
 .goPrevious p, .goNext p {
   font-weight: bold;
   display: inline-block;
-
 }
 
-.cohortInfo {
+.cohortInfo { /* where the data is displayed */
   width: 75%;
   border: 10px solid black;
   padding: 5px 5px;
   font-size: 1.5em;
   display: inline-block;
   min-height: 250px;
+  background-color: papayawhip;
 }
 
+.cohortInfo div {
+  height: 250px;
+} /* lets a colored border be set at the right size */
 
 .indexRow {
     /*clear: both;  not necessary since not floating.*/
-    width: 95%;
+    width: 99%;
     margin: 5px auto;
     padding: 1px 1px;
     background-color: black;
-    height: 70px;
     text-align: center;
 }
 
