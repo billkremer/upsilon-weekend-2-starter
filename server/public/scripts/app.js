@@ -3,7 +3,8 @@ var currentPerson = {};
 var currentPersonIndex = 0;
 var currentColor = 'white';
 var stopTimer;
-
+var gotoNameID = 0; // gets the name of the ID to go directly to a person.
+var getStyle = "black"; // gets the color of the box to match to the infobox border.  starts at black (just in case)
 
   $.ajax({
     type: "GET",
@@ -33,18 +34,6 @@ var stopTimer;
       goToAnother(data, currentPersonIndex);
     });
 
-    // $('.goNext').on('click', function () {
-    //   if (currentPersonIndex == data.length-1) {
-    //     currentPersonIndex = 0;
-    //   } else {
-    //     currentPersonIndex++;
-    //   }
-    //   $('.cohortInfo').children('div').fadeOut(1000, function() {
-    //     $('.cohortInfo').children('div').remove();
-    //     appendDOM(data[currentPersonIndex]);
-    //   });
-    // });
-
 
     $('.goNext').on('click', function () {
       if (currentPersonIndex == data.length - 1) {
@@ -53,19 +42,31 @@ var stopTimer;
         currentPersonIndex++;
       }
       // clearInterval(stopTimer);
-
+console.log(stopTimer);
       goToAnother(data, currentPersonIndex);
 
-      // stopTimer = setInterval(goToTheNext(data, currentPersonIndex), 10000);  // change to 10000 = 10s
+      // stopTimer = setInterval(goToAnother(data, currentPersonIndex), 5000);  // change to 10000 = 10s
+console.log(stopTimer);
 
+    });
 
+// this section to go where the index button says.
+    $('.indexRow').on('click', 'div', function () {
+      gotoNameID = $(this).attr('id');
+
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].githubUserName == gotoNameID) {
+        currentPersonIndex = i;
+        }
+      };
+        goToAnother(data, currentPersonIndex);
     });
 
 
 
-    }
-  });
-});
+    } // closes success element
+  }); // closes ajax
+});   // closes doc ready
 
 function timerFunction () {
 
@@ -73,6 +74,7 @@ function timerFunction () {
 
 
 function goToAnother (data, currentPersonIndex) {
+  // this function fades out the previous person, removes the div, then calls append DOM which fades in the next person.
   $('.cohortInfo').children('div').fadeOut(1000, function() {
     $('.cohortInfo').children('div').remove();
     appendDOM(data[currentPersonIndex]);
@@ -102,16 +104,25 @@ function appendDOM (person) {
   $('.indexRow').children().removeClass('indexRowCurrent');
   // removes any already existing highlighting.
 
-  var $personDiv = $('<div style="display:none;" id="' + person.githubUserName + '"></div>');
+  getStyle = $('.indexRow').children('#' + person.githubUserName).attr('style');
+  var color = getStyle.split(':')[1];
+  // finds the color of the indexRow square for the current person
+
+
+  var $personDiv = $('<div style="display:none; border: 10px solid ' + color + ';" id="' + person.githubUserName + '"></div>');
+  // adds a border the same color as their indexPersonDiv.
+  // also adds their githubUserName as an ID for later retrieval.
+
   $personDiv.append('<p>' + person.name + '</p>')
   $personDiv.append('<p><a href="https://github.com/' + person.githubUserName + '"</a>https://github.com/' + person.githubUserName + '</a></p>')
   $personDiv.append('<p>' + person.shoutout + '</p>')
   // builds the html for the DOM.
 
   $('.cohortInfo').append($personDiv);
-  // appends the main personal info in the DOM
+  // appends the main personal info in the DOM ( but is currently invisible)
 
   $('.cohortInfo').find('#' + person.githubUserName).fadeIn(1000);
+  // makes .cohortInfo visible.
 
   $('.indexRow').find('#' + person.githubUserName).addClass('indexRowCurrent');
   // toggles the current person down inthe indexRow.
