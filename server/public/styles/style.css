@@ -64,7 +64,22 @@ h1 {
   font-size: 1.5em;
   font-weight: bold;
   display: inline-block;
+  padding: 5px;
+  position: absolute;
+  top: 170px;
+  animation: pulse 80s infinite alternate;
+  background-color: #FFEAEA;
+  z-index: 5;
+  opacity: 0.9;
   /*border: 1px solid black; /*working to line up with .cohortInfo */*/
+}
+
+.goPrevious {
+  left: 1%;
+}
+
+.goNext {
+  right: 1%;
 }
 
 .goPrevious p, .goNext p {
