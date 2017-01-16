@@ -1,7 +1,7 @@
 // Global variables
 var currentPersonIndex = 0;
 var currentColor = 'white';  // color placeholder for the individual people
-var stopTimer;  // used to stop the timer
+var stopTimer = null;  // used to stop the timer
 var gotoNameID = 0; // gets the name of the ID to go directly to a person.
 var getStyle = "black"; // gets the color of the box to match to the infobox border.  starts at black (just in case)
 
