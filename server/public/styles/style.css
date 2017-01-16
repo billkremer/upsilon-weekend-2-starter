@@ -26,6 +26,10 @@ h1 {
   min-width: 95%;
   margin: 10px auto;
   text-align: center;
+
+  display: flex; /*  added for formatting! */
+  justify-content: center;
+  align-items: center;
 }
 
 #leftArrow, #rightArrow {
@@ -65,14 +69,6 @@ h1 {
   font-weight: bold;
   display: inline-block;
   padding: 5px;
-  position: absolute;
-  top: 170px;
-
-  animation: pulse 80s infinite alternate; /* keeps visibity when screen is very small */
-  background-color: #FFEAEA;
-  z-index: 5;
-  opacity: 0.9;
-  /*border: 1px solid black; for working to line up with .cohortInfo */
 }
 
 .goPrevious {
